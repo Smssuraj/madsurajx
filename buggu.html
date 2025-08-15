@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj ❤️ Madhu - Hamari Pyaar Ki Kahani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .heart-animation {
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.6);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .parallax-bg {
+            background: linear-gradient(45deg, rgba(255, 182, 193, 0.3), rgba(255, 20, 147, 0.2));
+            position: relative;
+        }
+
+        .love-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .love-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.3);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #ff1493;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff1493; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #ff1493;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: linear-gradient(to bottom, #ff1493, #ff69b4);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .photo-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+            border-radius: 17px;
+            z-index: -1;
+        }
+
+        .distance-counter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .message-bubble {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 20px 20px 5px 20px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .message-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #ff9a9e;
+            border-bottom: 0;
+            margin-left: -10px;
+            margin-bottom: -10px;
+        }
+
+        .love-meter {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .love-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff1493, #ff69b4);
+            border-radius: 10px;
+            animation: fillLove 3s ease-in-out;
+        }
+
+        @keyframes fillLove {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center parallax-bg relative z-10">
+        <div class="text-center px-4">
+            <h1 class="text-6xl md:text-8xl font-bold dancing-script gradient-text mb-4 heart-animation">
+                Suraj <span class="sparkle">✨</span> Madhu
+            </h1>
+            <div class="typewriter text-2xl md:text-3xl text-purple-800 mb-8 mx-auto" style="width: 350px;">
+                Mumbai se Punjab tak ka Pyaar   
+            </div>
+            <p class="text-xl text-gray-700 mb-8 dancing-script">
+                "Distance means nothing when someone means everything"
+            </p>
+            <div class="text-6xl mb-8 heart-animation">
+                <i class="fas fa-heart text-red-500"></i>
+            </div>
+            <button onclick="scrollToStory()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 pulse">
+                <i class="fas fa-heart mr-2"></i> Hamari Kahani Padhiye
+            </button>
+        </div>
+    </section>
+
+    <!-- Our Photos Section -->
+    <section class="py-16 bg-white relative z-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center dancing-script gradient-text mb-12">
+                <i class="fas fa-camera text-pink-500 mr-3"></i>Hamari Memories
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Suraj's Photo -->
+                <div class="love-card p-6 rounded-2xl text-center">
+                    <div class="photo-frame mx-auto mb-4" style="width: 280px; height: 350px;">
+                        <img src="./me.jpg" 
+                             alt="Handsome young Indian man named Suraj with confident smile, wearing casual shirt, standing in Mumbai cityscape with modern buildings in background, warm lighting, professional portrait style"
+                             class="w-full h-full object-cover rounded-lg"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <i class="fas fa-user text-4xl mb-2"></i>
+                                <p class="text-lg font-semibold">Suraj</p>
+                                <p class="text-sm">Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold dancing-script text-blue-600 mb-2">Suraj Singh</h3>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-red-500"></i> Mumbai</p>
+                    <p class="text-pink-600 font-semibold">Mera Dil, Aap ki Jaan ❤️</p>
+                </div>
+
+                <!-- Madhu's Photo -->
+                <div class="love-card p-6 rounded-2xl text-center">
+                    <div class="photo-frame mx-auto mb-4" style="width: 280px; height: 350px;">
+                        <img src="./buggu.jpg" 
+                             alt="Beautiful young Punjabi woman named Madhu with bright smile, wearing traditional colorful dupatta, long flowing hair, standing in Punjab countryside with golden wheat fields, natural warm lighting, elegant portrait"
+                             class="w-full h-full object-cover rounded-lg"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 rounded-lg flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <i class="fas fa-user text-4xl mb-2"></i>
+                                <p class="text-lg font-semibold">Buggu</p>
+                                <p class="text-sm">Punjab</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold dancing-script text-purple-600 mb-2">Madhu Singh (Buggu)</h3>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-red-500"></i> Punjab</p>
+                    <p class="text-pink-600 font-semibold">Meri Buggu, Meri Wife Jii ❤️</p>
+                </div>
+            </div>
+
+            <!-- Couple Photo -->
+            <div class="mt-12 text-center">
+                <h3 class="text-3xl dancing-script gradient-text mb-6">Humara Couple Photo</h3>
+                <div class="photo-frame mx-auto" style="width: 400px; height: 300px;">
+                    <img src="./both.jpg" 
+                         alt="Romantic couple photo of Suraj and Madhu together, both smiling lovingly at camera, Suraj in casual shirt and Madhu in colorful traditional outfit, sitting close together in beautiful garden setting with flowers, golden hour lighting, dreamy romantic atmosphere"
+                         class="w-full h-full object-cover rounded-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none;" class="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 rounded-lg flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <i class="fas fa-heart text-4xl mb-2"></i>
+                            <p class="text-lg font-semibold">Suraj ❤️ Madhu</p>
+                            <p class="text-sm">Forever Together</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Story Timeline -->
+    <section id="story" class="py-16 bg-gradient-to-br from-pink-50 to-purple-50 relative z-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center dancing-script gradient-text mb-12">
+                <i class="fas fa-book-heart text-pink-500 mr-3"></i>Hamari Pyaar Ki Kahani
+            </h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item mb-8">
+                    <div class="love-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-2 dancing-script">18 June 2024 - Pehli Mulakat</h3>
+                        <p class="text-gray-700 text-lg">
+                            <i class="fas fa-calendar-heart text-red-500 mr-2"></i>
+                            June mein jab hum pehli baar mile, tab pata nahi tha ki yeh mulakat hamari zindagi badal degi. 
+                            Dil mein ek ajeeb sa ehsaas hua tha, jaise kuch khaas hone wala ho.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item mb-8">
+                    <div class="love-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-2 dancing-script">Rishta Shuru Hua</h3>
+                        <p class="text-gray-700 text-lg">
+                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                            Dheere dheere baat karte rahe, aur phir ek din dil ki baat kahi. 
+                            Buggu ne bhi haa keh di, aur bas phir se hamara pyaar ka safar shuru ho gaya.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item mb-8">
+                    <div class="love-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-2 dancing-script">Singh Family Connection</h3>
+                        <p class="text-gray-700 text-lg">
+                            <i class="fas fa-users text-red-500 mr-2"></i>
+                            Jab pata chala ki hum dono Singh family se hain, toh laga jaise yeh rishtey 
+                            aasman mein bane hain. Ek hi caste, ek hi values, bas perfect match!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="love-card p-6 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-2 dancing-script">Long Distance Love</h3>
+                        <p class="text-gray-700 text-lg">
+                            <i class="fas fa-route text-red-500 mr-2"></i>
+                            Mumbai se Punjab ka distance hamein alag kar sakta hai, lekin hamara pyaar 
+                            har distance se zyada strong hai. Buggu, tum meri zindagi ho! ❤️
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distance Counter -->
+    <section class="py-16 bg-white relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold dancing-script gradient-text mb-8">
+                Distance Counter
+            </h2>
+            
+            <div class="max-w-md mx-auto distance-counter mb-8">
+                <h3 class="text-2xl font-bold mb-4">Mumbai ↔️ Punjab</h3>
+                <div class="text-4xl font-bold mb-2" id="distance">1,450 KM</div>
+                <p class="text-lg">Physical Distance</p>
+            </div>
+
+            <div class="max-w-md mx-auto love-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-purple-600 mb-4">Love Meter</h3>
+                <div class="love-meter mb-2">
+                    <div class="love-fill" style="width: 100%;"></div>
+                </div>
+                <p class="text-gray-700">Hamara Pyaar: 100% Strong! 💪</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Messages -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50 relative z-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center dancing-script gradient-text mb-12">
+                <i class="fas fa-envelope-heart text-pink-500 mr-3"></i>Love Messages
+            </h2>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="message-bubble">
+                    <p class="text-lg font-semibold text-purple-800">Buggu, tum meri duniya hai! ❤️</p>
+                    <small class="text-gray-600">- Suraj</small>
+                </div>
+
+                <div class="message-bubble ml-auto" style="max-width: 80%; border-radius: 20px 5px 20px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <p class="text-lg font-semibold">Aur main tumhari, hamesha ke liye! 💕</p>
+                    <small class="text-gray-200">- Buggu</small>
+                </div>
+
+                <div class="message-bubble">
+                    <p class="text-lg font-semibold text-purple-800">Distance kuch nahi, hamara pyaar sab kuch hai!</p>
+                    <small class="text-gray-600">- Suraj</small>
+                </div>
+
+                <div class="message-bubble ml-auto" style="max-width: 80%; border-radius: 20px 5px 20px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <p class="text-lg font-semibold">Haa bilkul! Tum mere dil mein ho hamesha! 💖</p>
+                    <small class="text-gray-200">- Buggu</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold dancing-script mb-4">
+                Suraj ❤️ Madhu
+            </h3>
+            <p class="text-xl mb-6">
+                "Pyaar mein distance sirf numbers hain, dil mein toh hum hamesha saath hain"
+            </p>
+            <div class="text-6xl mb-6 heart-animation">
+                <i class="fas fa-heart"></i>
+            </div>
+            <p class="text-lg">
+                Made with 💖 by Suraj for his beloved Buggu
+            </p>
+            <div class="mt-6">
+                <p class="text-sm opacity-75">
+                    Mumbai + Punjab = Perfect Love Story 🌟
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Floating Hearts Animation
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('floating-hearts').appendChild(heart);
+
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create hearts every 2 seconds
+        setInterval(createFloatingHeart, 2000);
+
+        // Smooth scroll to story section
+        function scrollToStory() {
+            document.getElementById('story').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effect to love cards
+            const loveCards = document.querySelectorAll('.love-card');
+            loveCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.05) rotate(1deg)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+
+            // Distance counter animation
+            let distance = 1450;
+            const distanceElement = document.getElementById('distance');
+            let currentDistance = 0;
+            const increment = distance / 100;
+            
+            const timer = setInterval(() => {
+                currentDistance += increment;
+                if (currentDistance >= distance) {
+                    currentDistance = distance;
+                    clearInterval(timer);
+                }
+                distanceElement.textContent = Math.floor(currentDistance).toLocaleString() + ' KM';
+            }, 30);
+
+            // Add sparkle effect on hover
+            const sparkleElements = document.querySelectorAll('.sparkle');
+            sparkleElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.animation = 'sparkle 0.5s ease-in-out';
+                });
+                element.addEventListener('animationend', function() {
+                    this.style.animation = 'sparkle 1.5s ease-in-out infinite';
+                });
+            });
+        });
+
+        // Add some romantic sound effects (optional)
+        function playHeartSound() {
+            // You can add sound effects here if needed
+            console.log('💖 Heart sound played!');
+        }
+
+        // Parallax effect for background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            parallaxElements.forEach(element => {
+                element.style.transform = `translateY(${rate}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
+
